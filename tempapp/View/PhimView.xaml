@@ -1,0 +1,474 @@
+﻿<UserControl x:Class="tempapp.View.PhimView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:tempapp.View"
+             xmlns:viewModel="clr-namespace:tempapp.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="1000"
+             Foreground="Black"
+             Background="#E0FBFC" FontSize="15">
+
+    <UserControl.DataContext>
+        <viewModel:PhimViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="chkBoxTemplate">
+            <CheckBox Content="{Binding TheLoai.TenTheLoai, UpdateSourceTrigger=PropertyChanged}" 
+                      IsChecked="{Binding IsTableChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="230"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="640"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <!--intput-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox materialDesign:HintAssist.Hint="Tên phim" 
+                     Grid.Column="0" Grid.Row="0"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     Text="{Binding TenPhim}"/>
+
+                    <ComboBox Grid.Column="1" Grid.Row="0"
+                          materialDesign:HintAssist.Hint="Chủ đề"
+                          Margin="20 20 20 0"
+                      ItemsSource="{Binding ListChuDe}"
+                      DisplayMemberPath="TenChuDe"
+                      SelectedItem="{Binding SelectedChuDe, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </ComboBox>
+
+                    <TextBox materialDesign:HintAssist.Hint="Số tập"
+                     Grid.Column="2" Grid.Row="0"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0" 
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     Text="{Binding SoTap}"/>
+
+                    <TextBox materialDesign:HintAssist.Hint="Lượt xem"
+                     Grid.Column="0" Grid.Row="1" IsReadOnly="True"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     PreviewTextInput="TextBox_PreviewTextInput" 
+                     Text="{Binding LuotXem}"/>
+
+                    <TextBox materialDesign:HintAssist.Hint="Lượt bình luận"
+                     Grid.Column="1" Grid.Row="1" IsReadOnly="True"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     Text="{Binding LuotBinhLuan}"/>
+
+                    <TextBox materialDesign:HintAssist.Hint="Điểm số / Lượt đánh giá"
+                     Grid.Column="2" Grid.Row="1" IsReadOnly="True"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     Margin="20 0 10 0"
+                     Text="{Binding DiemSo}"/>
+
+                    <TextBox materialDesign:HintAssist.Hint="Thời lượng (phút)"
+                     Grid.Column="0" Grid.Row="2"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     Text="{Binding ThoiLuong}"/>
+
+
+                    <TextBox materialDesign:HintAssist.Hint="Năm phát hành" 
+                     Grid.Column="1" Grid.Row="2"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     PreviewTextInput="TextBox_PreviewTextInput"
+                     Text="{Binding NamPhatHanh}"/>
+
+                    <ComboBox Grid.Column="2" Grid.Row="2"
+                          materialDesign:HintAssist.Hint="Mùa phát hành"
+                          Margin="20 20 20 0"
+                      ItemsSource="{Binding ListMua}"
+                      DisplayMemberPath="TenMua"
+                      SelectedItem="{Binding SelectedMua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <ComboBox Grid.Column="0"
+                          materialDesign:HintAssist.Hint="Trạng thái"
+                          Margin="20 20 20 0"
+                      ItemsSource="{Binding ListTrangThai}"
+                      DisplayMemberPath="TenTrangThai"
+                      SelectedItem="{Binding SelectedTrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </ComboBox>
+
+                    <TextBox materialDesign:HintAssist.Hint="Chất lượng"
+                     Grid.Column="1" Grid.Row="0"
+                     materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     Text="{Binding ChatLuong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <ComboBox   Grid.Column="2" Grid.Row="0"
+                        materialDesign:HintAssist.Hint="Tác giả"
+                        Margin="20 20 20 0"
+                        ItemsSource="{Binding ListTacGia}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Foreground="Black" 
+                                  Content="{Binding TenTacGia}"
+                                  IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <ComboBox Grid.Column="3" Grid.Row="0"
+                        materialDesign:HintAssist.Hint="Studio"
+                        Margin="20 20 20 0"
+                        ItemsSource="{Binding ListStudio}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Foreground="Black" 
+                                  Content="{Binding TenStudio}"
+                                  IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="320"/>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBox materialDesign:HintAssist.Hint="Nội dung"
+                     Grid.Column="0"
+                    materialDesign:HintAssist.Foreground="Black"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Black"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     VerticalAlignment="Center"
+                     FontSize="15"
+                     Margin="20 0 10 0"
+                     TextWrapping="Wrap"
+                     Text="{Binding NoiDung}"/>
+
+                    <ComboBox   Grid.Column="1"  
+                        materialDesign:HintAssist.Hint="Thể loại"
+                        Margin="20 20 20 0"
+                        Name="cbbTheLoai"
+                        ItemsSource="{Binding ListTheLoai}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Foreground="Black" 
+                                  Content="{Binding TenTheLoai}"
+                                  IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <ComboBox  Grid.Column="2"  
+                        materialDesign:HintAssist.Hint="Rules"
+                        Margin="20 20 20 0"
+                        Name="cbbRules"
+                        ItemsSource="{Binding ListLuat}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Foreground="Black" 
+                                  Content="{Binding TenLuat}"
+                                  IsChecked="{Binding Check, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="260"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <!--hinh anh-->
+                <Grid Grid.Row="0">
+                    <TabControl Style="{StaticResource MaterialDesignTabControl}" 
+                                FontSize="15"
+                                Margin="10" >
+                        <TabItem Header="Ảnh">
+                            <!-- Your tab content -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Name="img"
+                                       Grid.Column="0"
+                                       Source="{Binding SelectedImage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <Button Grid.Column="1"
+                                        Content="Chọn ảnh"
+                                        VerticalAlignment="Center"
+                                        Width="100"
+                                        Height="40"
+                                        Background="#9DB4C0"
+                                        BorderBrush="#9DB4C0"
+                                        Foreground="Black"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        materialDesign:ButtonAssist.CornerRadius="15"
+                                        Command="{Binding ChonAnh_Command}"
+                                        CommandParameter="{Binding ElementName=img}"/>
+                            </Grid>
+
+                        </TabItem>
+                        <TabItem Header="Tập phim" ToolTip="Vui lòng tạo phim trước khi thêm các tập mới!" >
+                            <!-- Your tab content -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ScrollViewer  VerticalScrollBarVisibility="Auto" 
+                                               Grid.Column="0"
+                                               HorizontalScrollBarVisibility="Auto">
+                                    <ListView ItemsSource="{Binding ListVideo}" ToolTip=""
+                                              SelectedItem="{Binding SelectedTapPhim, Mode=TwoWay}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="60"/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding SoTap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Grid.Column="0"
+                                                           Foreground="Black"/>
+                                                    <TextBlock Text="{Binding tenFileVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Grid.Column="1"
+                                                           Foreground="Black"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollViewer>
+
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center" Width="50">
+                                    <Button Height="50"
+                                            Width="50"
+                                            Padding="0"
+                                            Grid.Column="2"
+                                            Background="Transparent"
+                                            BorderThickness="1"
+                                            Foreground="Black" Margin="0 0 0 5"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            ToolTip="Chọn file"
+                                            Command="{Binding ChonVideo_Command}">
+                                        <materialDesign:PackIcon Kind="FileUpload" 
+                                                                Height="40"
+                                                                Width="40"/>
+                                    </Button>
+                                    <Button Height="50"
+                                            Width="50"
+                                            Padding="0"
+                                            Grid.Column="3"
+                                            Background="Transparent"
+                                            BorderThickness="1"
+                                            Foreground="Black" Margin=" 0 5 0 0"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            ToolTip="Phát thử"
+                                            Command="{Binding PlayVideo_Command}">
+                                        <materialDesign:PackIcon Kind="Play" 
+                                                                Height="50"
+                                                                Width="50" Margin="-10 0 0 0"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+
+                <!--video-->
+                <Grid Grid.Row="0">
+
+                </Grid>
+
+                <!--button-->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="90"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0"
+                         Width="180"
+                         Height="40"
+                         Padding="15 5 5 5"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center" 
+                         VerticalContentAlignment="Center"
+                         Margin="0 0 0 0" 
+                         FontSize="15"
+                         materialDesign:TextFieldAssist.TextFieldCornerRadius="15"
+                         materialDesign:HintAssist.Background="#E0FBFC"
+                         materialDesign:HintAssist.HelperTextFontSize="15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         materialDesign:HintAssist.Hint="Search"
+                         Name="txtSearch">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding EnterCommand}" 
+                                    CommandParameter="{Binding ElementName=txtSearch}"
+                                    Key="Return" />
+                        </TextBox.InputBindings>
+
+                    </TextBox>
+
+                    <Button Grid.Column="1" 
+                                Background="#9DB4C0"
+                                BorderBrush="#9DB4C0"
+                                Foreground="Black"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Height="40"
+                                Width="80"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="15"
+                                Command="{Binding Them_Command}"
+                                Content="Thêm"
+                                FontSize="16">
+
+                    </Button>
+
+                    <Button Grid.Column="2"
+                                Background="#9DB4C0"
+                                BorderBrush="#9DB4C0"
+                                Foreground="Black"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Height="40"
+                                Width="80"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="15"
+                                Command="{Binding Sua_Command}"
+                                Content="Sửa"
+                                FontSize="16">
+                    </Button>
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+
+        <!--data-->
+        <Grid Grid.Row="4">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto">
+                <ListView VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center" FontSize="10" Width="auto" ItemsSource="{Binding ListPhim}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header ="ID" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header ="Tên phim" DisplayMemberBinding="{Binding TenPhim}"/>
+                            <GridViewColumn Header ="Tên chủ đề" DisplayMemberBinding="{Binding ChuDe.TenChuDe}"/>
+                            <GridViewColumn Header ="Thể loại" DisplayMemberBinding="{Binding Cua_Phim_TheLoai.Count}"/>
+                            <GridViewColumn Header ="Số tập" DisplayMemberBinding="{Binding SoTap}"/>
+                            <GridViewColumn Header ="Thời lượng" DisplayMemberBinding="{Binding ThoiLuong}"/>
+                            <GridViewColumn Header ="Lượt bình luận" DisplayMemberBinding="{Binding NguoiDung_BinhLuan_Phim.Count}"/>
+                            <GridViewColumn Header ="Đánh giá / Lượt đánh giá" DisplayMemberBinding="{Binding NguoiDung_DanhGia_Phim.Count}"/>
+                            <GridViewColumn Header ="Lượt xem" DisplayMemberBinding="{Binding NguoiDung_Xem_Phim.Count}"/>
+                            <GridViewColumn Header ="Nội dung" DisplayMemberBinding="{Binding NoiDung}"/>
+                            <GridViewColumn Header ="Năm phát hành" DisplayMemberBinding="{Binding NamPhatHanh}"/>
+                            <GridViewColumn Header ="Mùa" DisplayMemberBinding="{Binding Mua.TenMua}"/>
+                            <GridViewColumn Header ="Trạng thái" DisplayMemberBinding="{Binding TrangThai.TenTrangThai}"/>
+                            <GridViewColumn Header ="Tác giả" DisplayMemberBinding="{Binding Cua_Phim_TacGia.Count}"/>
+                            <GridViewColumn Header ="Chất lượng" DisplayMemberBinding="{Binding ChatLuong}"/>
+                            <GridViewColumn Header ="Studio" DisplayMemberBinding="{Binding Cua_Phim_Studio.Count}"/>
+                            <GridViewColumn Header ="Luật phim" DisplayMemberBinding="{Binding Cua_Phim_Luat.Count}"/>
+                            <GridViewColumn Header ="Ảnh" DisplayMemberBinding="{Binding AnhDaiDiens.Count}"/>
+                            <GridViewColumn Header ="Studio" DisplayMemberBinding="{Binding VIDEOs.Count}"/>
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</UserControl>

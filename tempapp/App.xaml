@@ -1,0 +1,71 @@
+﻿<Application x:Class="tempapp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:tempapp"
+             xmlns:view="clr-namespace:tempapp.View"
+             xmlns:viewModel="clr-namespace:tempapp.ViewModel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
+                <ResourceDictionary Source="ResourcesXAML/MainResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/LoginButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ForwardButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ItemTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:TheLoaiViewModel}">
+                <view:TheLoaiView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ChuDeViewModel}">
+                <view:ChuDeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:TrangThaiViewModel}">
+                <view:TrangThaiView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:TacGiaViewModel}">
+                <view:TacGiaView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StudioViewModel}">
+                <view:StudioView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PhimViewModel}">
+                <view:PhimView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:MuaViewModel}">
+                <view:MuaView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:LuatViewModel}">
+                <view:LuatView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:NguoiDungViewModel}">
+                <view:NguoiDungView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:BinhLuanViewModel}">
+                <view:BinhLuanView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ThongKeViewModel}">
+                <view:ThongKeView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

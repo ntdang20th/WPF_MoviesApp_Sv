@@ -1,0 +1,254 @@
+﻿<Window x:Class="tempapp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tempapp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:tempapp.MyUserCOntrol"
+        xmlns:viewModel="clr-namespace:tempapp.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        
+        Name="mainWindow"
+        Height="600" Width="1200"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Border Background="#253237"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="1000"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="530"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <Image Source="/Images/logo.png" Width="140" Margin="0,20,0,0"/>
+                <TextBlock Text="REMAKE OUR LIFE!"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="13"
+                           Foreground="LightCyan" 
+                           Width="105"
+                           Margin="0,5,0,0" 
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+
+            <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <uc:ucControlBar
+                         Height="40"
+                         Width="auto"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" >
+                <ScrollViewer HorizontalAlignment="Stretch" 
+                              HorizontalScrollBarVisibility="Disabled" 
+                              VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10" >
+                        <Grid Name="thongke">
+                            <materialDesign:PackIcon Kind="ChartBar"
+                                                     Width="15" Height="15"
+                                                     Margin="10 16" Foreground="White"/>
+                            <RadioButton Content="Thống kê" Name="rdbThongke"
+                                        Height="40"
+                                        Foreground="#E3E4E5"
+                                        HorizontalContentAlignment="Left"
+                                        FontSize="16" 
+                                        Style="{StaticResource MenuButtonTheme}" Width="170"
+                                        Command="{Binding ThongKeCommand}">
+                            </RadioButton>
+                        </Grid>
+                        <Grid Style="{x:Null}" Name="finalPanel0">
+                            <materialDesign:PackIcon Kind="Film" Width="15" Height="15"
+                                 Margin="10 16" Foreground="White"/>
+                           
+                            <Expander 
+                                      Header="Phim" 
+                                      Expanded="HandleExpanderExpanded" 
+                                      Width="170"
+                                      FontSize="18"
+                                      HorizontalAlignment="Right"
+                                      Background="{x:Null}" Margin="0,0,-0.330,0"
+                                      Foreground="White" >
+                                <ListView 
+                                          Foreground="White" 
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Chủ đề"
+                                                     Height="40"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16" 
+                                                     Style="{StaticResource MenuButtonTheme}" Width="170"
+                                                     Command="{Binding ChuDeViewCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Thể loại"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding TheLoaiViewCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Trạng thái"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding TrangThaiCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Mùa"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding MuaCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Luật phim"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding LuatCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="phim" Content="Phim"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding PhimCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                </ListView>
+                            </Expander>
+
+                        </Grid>
+
+                        <Grid Style="{x:Null}" Name="finalPanel1">
+                            <materialDesign:PackIcon Kind="Domain" Width="15" Height="15"
+                                 Margin="10 16" Foreground="White"/>
+                            <Expander Expanded="HandleExpanderExpanded" 
+                                      Header="Nguồn" 
+                                      IsExpanded="False"
+                                      Width="170"
+                                      FontSize="18"
+                                      HorizontalAlignment="Right"
+                                      Background="{x:Null}" Margin="0,0,-0.330,0"
+                                      Foreground="White" >
+                                <ListView 
+                                          Foreground="#E3E4E5" 
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="nguon" Content="Tác giả"
+                                                     Height="40"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16" 
+                                                     Style="{StaticResource MenuButtonTheme}" Width="170"
+                                                     Command="{Binding TacGiaCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="nguon" Content="Studio"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding StudioCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+
+                                </ListView>
+                            </Expander>
+
+                        </Grid>
+
+                        <Grid Style="{x:Null}" Name="finalPanel2">
+                            <materialDesign:PackIcon Kind="AccountGroupOutline" Width="15" Height="15"
+                                 Margin="10 16" Foreground="white"/>
+                            <Expander Expanded="HandleExpanderExpanded" 
+                                      Header="Quản lý" 
+                                      IsExpanded="False"
+                                      Width="170"
+                                      FontSize="18"
+                                      HorizontalAlignment="Right"
+                                      Background="{x:Null}" Margin="0,0,-0.330,0"
+                                      Foreground="White" >
+                                <ListView 
+                                          Foreground="#E3E4E5" 
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="nguoidung" Content="Người dùng"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding NguoiDungCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+
+                                    <ListViewItem Padding="0">
+                                        <RadioButton GroupName="nguoidung" Content="Bình luận"
+                                                     Height="40"
+                                                     Width="170"
+                                                     Foreground="#E3E4E5"
+                                                     FontSize="16"
+                                                     Style="{StaticResource MenuButtonTheme}"
+                                                     Command="{Binding BinhLuanCommand}">
+                                        </RadioButton>
+                                    </ListViewItem>
+                                </ListView>
+                            </Expander>
+
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+
+            <ContentControl Grid.Row="1" Grid.Column="1"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+    </Border>
+
+</Window>
